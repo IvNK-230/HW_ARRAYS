@@ -1,7 +1,5 @@
 package ru.netology.stats;
 
-import java.util.Arrays;
-
 public class StatsService {
 
     public int salesForYear(int[] sales) {
@@ -13,13 +11,7 @@ public class StatsService {
     }
 
     public int AverageSales(int[] sales) {
-        int sum = 0;                                // сумма продаж за год
-        int average = 0;                            // среднее значение продаж за год
-        for (int value : sales) {
-            sum += value;                           // складываем все продажи за год
-        }
-        average = sum / sales.length;               // находим среднее за год
-        return average;
+        return salesForYear(sales) / sales.length;  // получаем сумму и делим на длину массива
     }
 
 
@@ -45,8 +37,7 @@ public class StatsService {
 
     public int UnderAverage(int[] sales) {
         int month = 0;                               // месяцев, в которых продажи были ниже среднего
-        int sum = Arrays.stream(sales).sum();        // сумма продаж за год
-        int average = sum / 12;
+        int average = salesForYear(sales) / sales.length;
         for (int i = 0; i < sales.length; i++) {
             if (average > sales[i]) {                // сравниваем каждый месяц с средним
                 month++;                             // запомним его как минимальный
@@ -56,8 +47,7 @@ public class StatsService {
     }
 
     public int OverAverage(int[] sales) {
-        int sum = OverAverage(sales);
-        int average = sum / sales.length;            // среднее значение продаж за год
+        int average = salesForYear(sales) / sales.length;
         int month = 0;                               // месяцев, в которых продажи были ниже среднего
         for (int i = 0; i < sales.length; i++) {
             if (average < sales[i]) {                // сравниваем каждый месяц с средним
